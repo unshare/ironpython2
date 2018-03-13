@@ -5,11 +5,11 @@ CONSOLERUNNER := ../../../packages/nunit.consolerunner/3.7.0/tools/nunit3-consol
 
 release: update-submodules
 	@$(MSBUILD) Build.proj /t:Build /p:Mono=true /p:BuildFlavour=Release /p:Platform="Any CPU" /verbosity:minimal /nologo
-	cp Src/DLR/bin/Release/net45/rowantest.*.dll bin/Release/net45/
+	cp Src/DLR/bin/Release/netcoreapp2.0/rowantest.*.dll bin/Release/netcoreapp2.0/
 
 debug: update-submodules
 	@$(MSBUILD) Build.proj /t:Build /p:Mono=true /p:BuildFlavour=Debug /p:Platform="Any CPU" /verbosity:minimal /nologo
-	cp Src/DLR/bin/Debug/net45/rowantest.*.dll bin/Debug/net45/
+	cp Src/DLR/bin/Debug/netcoreapp2.0/rowantest.*.dll bin/Debug/netcoreapp2.0/
 
 stage: update-submodules
 	@$(MSBUILD) Build.proj /t:Stage /p:Mono=true /p:BuildFlavour=Release /verbosity:minimal /nologo
@@ -24,25 +24,25 @@ update-submodules:
 	@git submodule update --init
 
 test-ironpython:
-	cd bin/Release/net45 && mono $(CONSOLERUNNER) --params "FRAMEWORK=net45" --labels=All --where:Category==IronPython --result:ironpython-net45-release-result.xml IronPythonTest.dll
+	cd bin/Release/netcoreapp2.0 && mono $(CONSOLERUNNER) --params "FRAMEWORK=netcoreapp2.0" --labels=All --where:Category==IronPython --result:ironpython-netcoreapp2.0-release-result.xml IronPythonTest.dll
 
 test-ironpython-debug:
-	cd bin/Debug/net45 && mono $(CONSOLERUNNER) --params "FRAMEWORK=net45" --labels=All --where:Category==IronPython --result:ironpython-net45-debug-result.xml IronPythonTest.dll
+	cd bin/Debug/netcoreapp2.0 && mono $(CONSOLERUNNER) --params "FRAMEWORK=netcoreapp2.0" --labels=All --where:Category==IronPython --result:ironpython-netcoreapp2.0-debug-result.xml IronPythonTest.dll
 
 test-cpython:
-	cd bin/Release/net45 && mono $(CONSOLERUNNER) --params "FRAMEWORK=net45" --labels=All --where:"Category==StandardCPython || Category==AllCPython" --result:cpython-net45-release-result.xml IronPythonTest.dll
+	cd bin/Release/netcoreapp2.0 && mono $(CONSOLERUNNER) --params "FRAMEWORK=netcoreapp2.0" --labels=All --where:"Category==StandardCPython || Category==AllCPython" --result:cpython-netcoreapp2.0-release-result.xml IronPythonTest.dll
 
 test-cpython-debug:
-	cd bin/Debug/net45 && mono $(CONSOLERUNNER) --params "FRAMEWORK=net45" --labels=All --where:"Category==StandardCPython || Category==AllCPython" --result:cpython-net45-debug-result.xml IronPythonTest.dll
+	cd bin/Debug/netcoreapp2.0 && mono $(CONSOLERUNNER) --params "FRAMEWORK=netcoreapp2.0" --labels=All --where:"Category==StandardCPython || Category==AllCPython" --result:cpython-netcoreapp2.0-debug-result.xml IronPythonTest.dll
 
 test-smoke:
-	cd bin/Release/net45 && mono $(CONSOLERUNNER) --params "FRAMEWORK=net45" --labels=All --where:Category==StandardCPython --result=smoke-net45-release-result.xml IronPythonTest.dll
+	cd bin/Release/netcoreapp2.0 && mono $(CONSOLERUNNER) --params "FRAMEWORK=netcoreapp2.0" --labels=All --where:Category==StandardCPython --result=smoke-netcoreapp2.0-release-result.xml IronPythonTest.dll
 
 test-smoke-debug:
-	cd bin/Debug/net45 && mono $(CONSOLERUNNER) --params "FRAMEWORK=net45" --labels=All --where:Category==StandardCPython --result=smoke-net45-debug-result.xml IronPythonTest.dll
+	cd bin/Debug/netcoreapp2.0 && mono $(CONSOLERUNNER) --params "FRAMEWORK=netcoreapp2.0" --labels=All --where:Category==StandardCPython --result=smoke-netcoreapp2.0-debug-result.xml IronPythonTest.dll
 
 test-all:
-	cd bin/Release/net45 && mono $(CONSOLERUNNER) --params "FRAMEWORK=net45" --labels=All --result=all-net45-release-result.xml IronPythonTest.dll
+	cd bin/Release/netcoreapp2.0 && mono $(CONSOLERUNNER) --params "FRAMEWORK=netcoreapp2.0" --labels=All --result=all-netcoreapp2.0-release-result.xml IronPythonTest.dll
 
 test-all-debug:
-	cd bin/Debug/net45 && mono $(CONSOLERUNNER) --params "FRAMEWORK=net45" --labels=All --result=all-net45-debug-result.xml IronPythonTest.dll
+	cd bin/Debug/netcoreapp2.0 && mono $(CONSOLERUNNER) --params "FRAMEWORK=netcoreapp2.0" --labels=All --result=all-netcoreapp2.0-debug-result.xml IronPythonTest.dll
